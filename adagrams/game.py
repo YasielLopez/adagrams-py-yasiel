@@ -10,14 +10,9 @@ LETTER_POOL = {
 }
 
 def draw_letters():
-
-    # list with correct amount of letters based on available amount
-
     all_letters = []
     for letter, count in LETTER_POOL.items():
         all_letters += [letter] * count
-
-# list of letters in player's hand filled with 10 and no duplicates
 
     hand = []
     used_indices = set()
@@ -32,7 +27,6 @@ def draw_letters():
 
 def uses_available_letters(word, letter_bank):
     letter_bank_copy = letter_bank[:]
-    
 
     for char in word.upper():
         if char in letter_bank_copy:
@@ -43,7 +37,30 @@ def uses_available_letters(word, letter_bank):
     return True
 
 def score_word(word):
-    pass
+    score_chart = {
+        1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
+        2: ['D', 'G'],
+        3: ['B', 'C', 'M', 'P'],
+        4: ['F', 'H', 'V', 'W', 'Y'],
+        5: ['K'],
+        8: ['J', 'X'],
+        10: ['Q', 'Z']
+    }
+
+    letter_points = {}
+    for points, letters in score_chart.items():
+        for letter in letters:
+            letter_points[letter] = points
+
+    total_score = 0
+    for char in word.upper():
+        if char in letter_points:
+            total_score += letter_points[char]
+
+    if 7 <= len(word) <= 10:
+        total_score += 8
+
+    return total_score  
 
 def get_highest_word_score(word_list):
     pass

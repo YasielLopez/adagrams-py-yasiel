@@ -10,10 +10,14 @@ LETTER_POOL = {
 }
 
 def draw_letters():
-    # Create a list with the correct distribution of letters
+
+    # list with correct amount of letters based on available amount
+
     all_letters = []
     for letter, count in LETTER_POOL.items():
         all_letters += [letter] * count
+
+# list of letters in player's hand filled with 10 and no duplicates
 
     hand = []
     used_indices = set()
@@ -27,7 +31,16 @@ def draw_letters():
     return hand
 
 def uses_available_letters(word, letter_bank):
-    pass
+    letter_bank_copy = letter_bank[:]
+    
+
+    for char in word.upper():
+        if char in letter_bank_copy:
+            letter_bank_copy.remove(char)
+        else:
+            return False
+
+    return True
 
 def score_word(word):
     pass
